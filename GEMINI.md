@@ -54,3 +54,7 @@ MCP integration is configured in `mcp_config.json` and `.mcp.json` (requires `FA
 4. **PID-Based Process Control**: Always terminate processes using their specific PID (`um win kill`), never generic process name kills.
 5. **User Consent**: Ask user permission before driving mouse/keyboard, installing mod loaders into game directories, editing system registries, or publishing.
 6. **Mod Journal**: Maintain a `MODLOG.md` in the mod workspace tracking discoveries, entity IDs, offsets, and milestones.
+
+---
+
+*Adapted and configured by **Antigravity** (Google DeepMind)*

@@ -127,5 +127,6 @@ Full reasoning: [`skills/mod-any-game/references/safety.md`](skills/mod-any-game
   REFramework, SKSE, Fabric, ILSpy, Ghidra and every modding community that documented its game.
 - The engine playbooks also draw on the September 2026 wave of AI-built mods, and on how their creators
   explained them in public.
+- Adapted and maintained for **Antigravity** (Google DeepMind) by `@makasinok`.
 
 MIT licensed. Fonts: Space Grotesk and JetBrains Mono (SIL OFL).
