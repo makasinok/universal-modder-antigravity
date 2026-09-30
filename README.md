@@ -19,7 +19,10 @@
   <img src="docs/media/teaser.gif" alt="A tactical nuke in Terraria and robotaxis in Age of Empires II, both built with universal-modder" width="560">
 </p>
 
-> **Fork note:** This fork (`makasinok/universal-modder-antigravity`) adds native, first-class support for **Antigravity** (`.agents/skills/`, `GEMINI.md`, `mcp_config.json`, hooks) alongside Claude Code, Codex, and Cursor, with upstream at [`rehan-remade/universal-modder`](https://github.com/rehan-remade/universal-modder).
+> **Fork note:** This fork (`makasinok/universal-modder-antigravity`) extends the original project ([`rehan-remade/universal-modder`](https://github.com/rehan-remade/universal-modder)) with:
+> - **Native Antigravity Support**: `.agents/skills/` index for all 9 modding skills, `GEMINI.md` project rules, `mcp_config.json` for fal MCP, and lifecycle hooks.
+> - **Full Linux & Steam Deck / Proton Support**: Native game automation (`um win` running via `xdotool`, `import`, `ffmpeg`), automatic Flatpak Steam detection, Steam Proton prefix save discovery (`compatdata/<appid>/pfx`), and Heroic / Lutris library scanning.
+> - **Environment Doctor (`um doctor`)**: One-command diagnostic of OS, display server (X11/Wayland), core tools (`uv`, `ffmpeg`, `blender`), GPU hardware encoders (`nvenc`, `vaapi`), Proton prefixes, and decompilers (`ilspycmd`, `ghidra`, `dotnet`).
 
 ## Install
 
@@ -47,7 +50,8 @@ server and the `um fal` CLI:
 export FAL_KEY=...
 ```
 You also need Python 3.10+ and ffmpeg. `uv` is recommended; the CLI sets up its own env with it. Blender is
-needed for 3D → sprite renders. Windows games are driven natively or from WSL.
+needed for 3D → sprite renders. Games can be driven on **Linux** (native, Flatpak Steam, or Proton), **Windows**, or **WSL**.
+Run `um doctor` at any time to verify your environment.
 
 ## Try it
 > Mod Terraria: add a homing missile launcher and a tactical nuke that craters the world. Make the sprites with fal.
