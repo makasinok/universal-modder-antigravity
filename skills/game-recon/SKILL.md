@@ -14,8 +14,8 @@ um scan --list                 # Steam, Epic and Xbox installs (Windows, WSL, Li
 um scan "<name or folder>"     # engine, version, exes (.NET?), anti-cheat, loaders, mod folders, saves, routes
 um scan "<game>" --json        # the same, machine-readable
 ```
-`um` is on PATH through this plugin's session hook. If it's missing, use `${CLAUDE_PLUGIN_ROOT}/bin/um`, or
-`bin/um` in a clone of universal-modder.
+`um` is on PATH through the session hook. If it's missing, use `bin/um` inside universal-modder, or
+`${CLAUDE_PLUGIN_ROOT}/bin/um`.
 
 `um scan` reads files only. It indexes the install (bounded), sniffs PE headers, the Unity/Godot/GameMaker
 headers and the Unreal version string, maps known games to their community loader, and points to the

@@ -3,12 +3,13 @@
 </p>
 
 <p align="center">
-  <b>Skills, tools and the fal MCP that let Claude Code mod almost any PC game you own.</b><br>
+  <b>Skills, tools and the fal MCP that let AI coding agents (Antigravity, Claude Code, Codex, Cursor) mod almost any PC game you own.</b><br>
   It finds the game, works out the engine and the modding route, reads the real code, builds the mod,<br>
   generates art, 3D and sound with <a href="https://fal.ai">fal</a>, tests it in the running game, and cuts the showcase video.
 </p>
 
 <p align="center">
+  <a href="#install"><img alt="Antigravity ready" src="https://img.shields.io/badge/Antigravity-ready-4285F4?labelColor=0A0D12"></a>
   <a href="#install"><img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude%20Code-plugin-B6FF3B?labelColor=0A0D12"></a>
   <a href="https://fal.ai"><img alt="assets by fal" src="https://img.shields.io/badge/assets-fal-B6FF3B?labelColor=0A0D12"></a>
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-B6FF3B?labelColor=0A0D12"></a>
@@ -18,17 +19,26 @@
   <img src="docs/media/teaser.gif" alt="A tactical nuke in Terraria and robotaxis in Age of Empires II, both built with universal-modder" width="560">
 </p>
 
+> **Fork note:** This fork (`makasinok/universal-modder`) adds native, first-class support for **Antigravity** (`.agents/skills/`, `GEMINI.md`, `mcp_config.json`, hooks) alongside Claude Code, Codex, and Cursor, with upstream at [`rehan-remade/universal-modder`](https://github.com/rehan-remade/universal-modder).
+
 ## Install
 
-**As a Claude Code plugin** (recommended):
+**For Antigravity (Antigravity IDE / CLI)**:
+Open this repo as a workspace or clone it:
+```bash
+git clone https://github.com/makasinok/universal-modder && cd universal-modder
+```
+Antigravity automatically discovers all 9 skills via `.agents/skills/`, enforces safety guidelines via `GEMINI.md`, and connects to the fal MCP server via `mcp_config.json`.
+
+**As a Claude Code plugin**:
 ```
 /plugin marketplace add rehan-remade/universal-modder
 /plugin install universal-modder@universal-modder
 ```
 
-**Or clone it and run Claude inside it** (works with Codex/Cursor via `AGENTS.md` too):
+**Or clone it and run Claude / Codex / Cursor**:
 ```bash
-git clone https://github.com/rehan-remade/universal-modder && cd universal-modder && claude
+git clone https://github.com/makasinok/universal-modder && cd universal-modder && claude
 ```
 
 Then give it a [fal API key](https://fal.ai/dashboard/keys) for assets. It powers both the bundled fal MCP
@@ -48,7 +58,7 @@ needed for 3D → sprite renders. Windows games are driven natively or from WSL.
 
 > What engine is `C:\Games\Foo`, and how do people mod it?
 
-Claude starts with the **mod-any-game** skill and runs the same loop every time: recon, pick a route, set up a
+The agent starts with the **mod-any-game** skill and runs the same loop every time: recon, pick a route, set up a
 safe lab (saves backed up), read the actual code, build one working slice, generate assets, verify in the
 real game, record, then package.
 

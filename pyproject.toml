@@ -10,6 +10,15 @@ dependencies = [
     "numpy>=1.24",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/makasinok/universal-modder"
+Upstream = "https://github.com/rehan-remade/universal-modder"
+
 [project.scripts]
 um = "um.cli:main"
 

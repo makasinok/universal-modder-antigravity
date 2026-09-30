@@ -13,8 +13,8 @@ about scaling up. Case studies: `references/case-studies.md`. Code: `examples/`.
 
 ## Your tools
 
-`um` is the toolkit CLI. The plugin's session hook puts it on PATH. If `um` isn't found, run it as
-`${CLAUDE_PLUGIN_ROOT}/bin/um`, or `bin/um` inside a clone of universal-modder. The first run sets up its
+`um` is the toolkit CLI. The session hook puts it on PATH. If `um` isn't found, run it as
+`bin/um` inside universal-modder, or `${CLAUDE_PLUGIN_ROOT}/bin/um`. The first run sets up its
 Python env through `uv`. Every group has `--help` with examples.
 
 | Need | Command |

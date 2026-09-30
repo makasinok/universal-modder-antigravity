@@ -1,8 +1,8 @@
 # universal-modder
 
-This repo is a game-modding toolkit for coding agents. When someone opens Claude Code (or Codex, Cursor...)
+This repo is a game-modding toolkit for coding agents. When someone opens Antigravity, Claude Code (or Codex, Cursor...)
 here, they almost always want to **mod a game**. Start with the `mod-any-game` skill
-(`skills/mod-any-game/SKILL.md`) and follow its loop: intake → recon → route → lab → source of truth →
+(`skills/mod-any-game/SKILL.md` or `.agents/skills/mod-any-game/SKILL.md`) and follow its loop: intake → recon → route → lab → source of truth →
 vertical slice → assets → verify in game → showcase → publish.
 
 ## Tools
