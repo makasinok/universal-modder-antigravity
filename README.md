@@ -19,14 +19,14 @@
   <img src="docs/media/teaser.gif" alt="A tactical nuke in Terraria and robotaxis in Age of Empires II, both built with universal-modder" width="560">
 </p>
 
-> **Fork note:** This fork (`makasinok/universal-modder`) adds native, first-class support for **Antigravity** (`.agents/skills/`, `GEMINI.md`, `mcp_config.json`, hooks) alongside Claude Code, Codex, and Cursor, with upstream at [`rehan-remade/universal-modder`](https://github.com/rehan-remade/universal-modder).
+> **Fork note:** This fork (`makasinok/universal-modder-antigravity`) adds native, first-class support for **Antigravity** (`.agents/skills/`, `GEMINI.md`, `mcp_config.json`, hooks) alongside Claude Code, Codex, and Cursor, with upstream at [`rehan-remade/universal-modder`](https://github.com/rehan-remade/universal-modder).
 
 ## Install
 
 **For Antigravity (Antigravity IDE / CLI)**:
 Open this repo as a workspace or clone it:
 ```bash
-git clone https://github.com/makasinok/universal-modder && cd universal-modder
+git clone https://github.com/makasinok/universal-modder-antigravity && cd universal-modder-antigravity
 ```
 Antigravity automatically discovers all 9 skills via `.agents/skills/`, enforces safety guidelines via `GEMINI.md`, and connects to the fal MCP server via `mcp_config.json`.
 
@@ -38,7 +38,7 @@ Antigravity automatically discovers all 9 skills via `.agents/skills/`, enforces
 
 **Or clone it and run Claude / Codex / Cursor**:
 ```bash
-git clone https://github.com/makasinok/universal-modder && cd universal-modder && claude
+git clone https://github.com/makasinok/universal-modder-antigravity && cd universal-modder-antigravity && claude
 ```
 
 Then give it a [fal API key](https://fal.ai/dashboard/keys) for assets. It powers both the bundled fal MCP

@@ -16,7 +16,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/makasinok/universal-modder"
+Homepage = "https://github.com/makasinok/universal-modder-antigravity"
 Upstream = "https://github.com/rehan-remade/universal-modder"
 
 [project.scripts]
