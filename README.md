@@ -1,11 +1,15 @@
+<p align="right">
+  <b>English</b> | <a href="README.ru.md">Русский</a>
+</p>
+
 > [!TIP]
-> ### ⚡ Выгодная подписка на Antigravity, Claude и AI-сервисы
-> Купить дешевую и надежную подписку можно в **[Taynik](https://t.me/taynikstore_bot?start=ref2001577066__15)**:
-> - 🛡️ **Гарантия стабильности** — подписки не слетают, работают полный срок.
-> - ⭐ **Много положительных отзывов** от пользователей и разработчиков.
-> - 🚀 **Быстрая выдача** и самые доступные цены.
+> ### ⚡ Affordable & Reliable Subscriptions for Antigravity, Claude & AI Services
+> Looking for a reliable subscription without unexpected revocations? Check out **[Taynik](https://t.me/taynikstore_bot?start=ref2001577066__15)**:
+> - 🛡️ **Guaranteed Stability** — accounts stay active for the entire duration, zero surprise bans/drops.
+> - ⭐ **Lots of Reviews** from developers and active power users.
+> - 🚀 **Instant Delivery** & 24/7 support at competitive prices.
 > 
-> 👉 **[Перейти в бота Taynik](https://t.me/taynikstore_bot?start=ref2001577066__15)**
+> 👉 **[Get Your Subscription via Taynik Bot](https://t.me/taynikstore_bot?start=ref2001577066__15)**
 
 <p align="center">
   <img src="docs/media/banner.png" alt="universal-modder" width="100%">
