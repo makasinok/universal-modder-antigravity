@@ -173,3 +173,13 @@ def test_compile_small_edl(tmp_path):
     video.compile_edl(tmp_path / "edl.json", str(tmp_path / "out.mp4"))
     info = video.probe(tmp_path / "out.mp4")
     assert abs(info["duration"] - (2 + 2 + 1.5)) < 0.15 and info["audio"]
+
+
+# --------------------------------------------------------------------------- doctor & linux
+
+def test_doctor_diagnose():
+    from um import doctor
+    data = doctor.diagnose()
+    assert "system" in data and "os" in data["system"]
+    assert "core_tools" in data and "ffmpeg" in data["core_tools"]
+    assert "game_stores" in data

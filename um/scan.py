@@ -140,8 +140,52 @@ def xbox_games() -> list[dict]:
     return out
 
 
+def heroic_games() -> list[dict]:
+    """Heroic Games Launcher (GOG and Epic on Linux, Steam Deck and macOS)."""
+    out = []
+    cands = [
+        Path.home() / ".config/heroic",
+        Path.home() / ".var/app/com.heroicgameslauncher.hgl/config/heroic",
+    ]
+    for cfg in cands:
+        if not cfg.is_dir():
+            continue
+        gog_json = cfg / "gog_store" / "installed.json"
+        if gog_json.exists():
+            try:
+                data = json.loads(gog_json.read_text(errors="replace"))
+                for item in data.get("installed", []):
+                    p = item.get("install_path")
+                    if p and Path(p).is_dir():
+                        out.append(dict(store="gog", appid=item.get("appName"), name=item.get("title") or Path(p).name, path=p))
+            except Exception:
+                pass
+        legendary_json = cfg / "store_cache" / "legendary_installed.json"
+        if legendary_json.exists():
+            try:
+                data = json.loads(legendary_json.read_text(errors="replace"))
+                for app_name, item in data.items():
+                    p = item.get("install_path")
+                    if p and Path(p).is_dir():
+                        out.append(dict(store="epic", appid=app_name, name=item.get("title") or Path(p).name, path=p))
+            except Exception:
+                pass
+    return out
+
+
+def lutris_games() -> list[dict]:
+    """Lutris installs and standard Linux Games directory."""
+    out = []
+    games_dir = Path.home() / "Games"
+    if games_dir.is_dir():
+        for d in games_dir.iterdir():
+            if d.is_dir() and not d.name.startswith("."):
+                out.append(dict(store="lutris", appid=None, name=d.name, path=str(d)))
+    return out
+
+
 def all_games() -> list[dict]:
-    return steam_games() + epic_games() + xbox_games()
+    return steam_games() + epic_games() + xbox_games() + heroic_games() + lutris_games()
 
 
 def resolve_game(query: str) -> dict:
@@ -580,8 +624,8 @@ def detect(ix: Index) -> tuple[list[tuple[str, int, list[str], dict]], dict]:
     return hits, facts
 
 
-def save_hints(name: str, det: dict) -> list[str]:
-    """Existing folders where this game probably keeps saves/config (Windows side)."""
+def save_hints(name: str, det: dict, appid: str | None = None) -> list[str]:
+    """Existing folders where this game probably keeps saves/config (Windows, Linux, or Proton prefix)."""
     wf = win_folders()
     prof, docs = wf.get("profile"), wf.get("documents")
     appdata, local = wf.get("appdata"), wf.get("localappdata")
@@ -604,6 +648,55 @@ def save_hints(name: str, det: dict) -> list[str]:
         cands += [Path.home() / "Library/Application Support" / n for n in names]
     if not is_windows() and not is_wsl():
         cands += [Path.home() / ".local/share" / n for n in names] + [Path.home() / ".config" / n for n in names]
+        # Inspect Proton / Wine prefixes for Windows games running on Linux
+        if appid:
+            for root in steam_roots():
+                pfx_roots = [root / "steamapps" / "compatdata" / str(appid) / "pfx"]
+                lf = root / "steamapps" / "libraryfolders.vdf"
+                if lf.exists():
+                    try:
+                        vdf_data = _vdf(lf.read_text(errors="replace"))
+                        for lib in (vdf_data.get("libraryfolders") or {}).values():
+                            if isinstance(lib, dict) and lib.get("path"):
+                                pfx_roots.append(Path(to_posix(lib["path"])) / "steamapps" / "compatdata" / str(appid) / "pfx")
+                    except Exception:
+                        pass
+                for pfx in pfx_roots:
+                    u = pfx / "drive_c" / "users" / "steamuser"
+                    if u.is_dir():
+                        def _ci(base_dir: Path) -> dict[str, Path]:
+                            if not base_dir.is_dir():
+                                return {}
+                            try:
+                                return {p.name.lower(): p for p in base_dir.iterdir() if p.is_dir()}
+                            except OSError:
+                                return {}
+
+                        ci_local = _ci(u / "AppData/Local")
+                        ci_roaming = _ci(u / "AppData/Roaming")
+                        ci_low = _ci(u / "AppData/LocalLow")
+                        ci_docs = _ci(u / "Documents")
+                        ci_mygames = _ci(u / "Documents/My Games")
+                        ci_saved = _ci(u / "Saved Games")
+
+                        for n in names:
+                            nl = n.lower()
+                            if nl in ci_local:
+                                cands.append(ci_local[nl])
+                                if (ci_local[nl] / "Saved/SaveGames").is_dir():
+                                    cands.append(ci_local[nl] / "Saved/SaveGames")
+                                elif (ci_local[nl] / "Saved").is_dir():
+                                    cands.append(ci_local[nl] / "Saved")
+                            if nl in ci_roaming:
+                                cands.append(ci_roaming[nl])
+                            if nl in ci_low:
+                                cands.append(ci_low[nl])
+                            if nl in ci_docs:
+                                cands.append(ci_docs[nl])
+                            if nl in ci_mygames:
+                                cands.append(ci_mygames[nl])
+                            if nl in ci_saved:
+                                cands.append(ci_saved[nl])
     out, seen = [], set()
     for c in cands:
         try:
@@ -651,7 +744,7 @@ def scan(query: str) -> dict:
         engine=dict(key=key, label=label, confidence=score, evidence=ev, **{k: v for k, v in det.items() if v not in (None, "")}),
         other_engine_signals=[dict(key=h[0], evidence=h[2]) for h in hits[1:4]],
         anti_cheat=anti, mod_loaders_installed=loaders, mod_folders=moddirs,
-        workshop=game.get("workshop"), saves=save_hints(name, det),
+        workshop=game.get("workshop"), saves=save_hints(name, det, appid=game.get("appid")),
         executables=facts.get("executables", {}), routes=routes, warnings=warnings,
         playbook=f"skills/mod-any-game/references/engines/{routes[0]['playbook']}",
         files_indexed=len(ix.files), index_truncated=ix.truncated,

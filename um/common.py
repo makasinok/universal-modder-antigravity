@@ -24,6 +24,24 @@ def is_wsl() -> bool:
     return "microsoft" in platform.release().lower() or os.path.exists("/proc/sys/fs/binfmt_misc/WSLInterop")
 
 
+def is_linux() -> bool:
+    return sys.platform.startswith("linux") and not is_wsl()
+
+
+def find_steam_cmd() -> list[str]:
+    """Find command to invoke Steam on the current system (native or flatpak)."""
+    if shutil.which("steam"):
+        return ["steam"]
+    if shutil.which("flatpak"):
+        try:
+            r = subprocess.run(["flatpak", "info", "com.valvesoftware.Steam"], capture_output=True, text=True)
+            if r.returncode == 0:
+                return ["flatpak", "run", "com.valvesoftware.Steam"]
+        except Exception:
+            pass
+    return ["steam"]
+
+
 def to_win(path: str | Path) -> str:
     """/mnt/c/Games/x -> C:\\Games\\x (WSL); paths that are already Windows paths pass through."""
     p = str(path)

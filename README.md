@@ -82,13 +82,14 @@ real game, record, then package.
 
 | | |
 |---|---|
-| `um scan` | Find Steam/Epic/Xbox installs; fingerprint engine and version, .NET vs native, anti-cheat, installed loaders, save folders, ranked routes |
+| `um doctor` | Diagnose environment, installed tools, display server, Steam/Proton, and GPU encoders |
+| `um scan` | Find Steam (native & Flatpak), Epic, Xbox, Heroic, Lutris installs, Proton prefixes; fingerprint engine and version, .NET vs native, anti-cheat, installed loaders, save folders, ranked routes |
 | `um fal` | `sprite`, `image`, `edit`, `rmbg`, `pixelate`, `upscale`, `texture`, `pbr`, `model3d`, `rig`, `sfx`, `music`, `voice`, `video`, `run`, `search`, `schema`, `price`. Plain REST, with a manifest of every generation |
 | `um sprite` | `cutout`, `fit`, `pixelate`, `palette`, `sheet`, `slice`, `frames`, `team-mask`, `seamless`, `preview` |
 | `um render3d` | GLB → sprite frames from the game's camera (`aoe2`, `iso8`, `trueiso`, `topdown`, `side`, `turntable`) with Blender |
-| `um win` | `shot`, `record` (gfxcapture + process-loopback audio), `drive` (input that only reaches the game), `ps`, `kill`, `launch`, `reg` |
+| `um win` | Cross-platform automation (Windows, WSL, and Linux): `shot`, `record`, `drive` (xdotool / WinDrive), `ps`, `kill`, `launch`, `reg` |
 | `um video` | `contact` sheets, `compile` (EDL → titled, beat-cut video with music), `mux`, `beats`, `first-frame` |
-| `um backup` | Snapshot, diff and restore save folders |
+| `um backup` | Snapshot, diff and restore save folders (Windows and Linux/Proton paths) |
 | `um publish check` | Blocks shipping game files, decompiled code and leaked keys |
 
 Also bundled: the **fal MCP server** (`.mcp.json`), a SessionStart hook that puts `um` on PATH, and two

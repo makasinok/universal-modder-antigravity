@@ -33,13 +33,14 @@ When starting a modding task, invoke the **`mod-any-game`** skill (`skills/mod-a
 ## Tooling & CLI (`bin/um`)
 
 `bin/um` is the unified Python CLI for the modder agent:
-- `um scan`: Locate Steam/Epic/Xbox games and fingerprint engines.
+- `um doctor`: Diagnose environment, installed tools, display server, Steam/Proton, and GPU encoders.
+- `um scan`: Locate Steam (native & Flatpak), Epic, Xbox, Heroic, and Lutris games, Proton prefixes, and fingerprint engines.
 - `um fal`: Direct CLI for fal.ai generation (sprites, textures, 3D, audio).
 - `um sprite`: 2D sprite processing (cutout, palette quantization, sheet generation).
 - `um render3d`: GLB to sprite frames with custom camera angles (Blender).
-- `um win`: Windows/WSL automation (launch, screenshot, game-audio recording, PID management).
+- `um win`: Game automation across Windows, WSL, and Linux (launch, screenshot, game-audio recording, PID management).
 - `um video`: Showcase video compiler and contact sheet generator.
-- `um backup`: Snapshot and restore game saves.
+- `um backup`: Snapshot and restore game saves (supports Windows and Linux/Proton paths).
 - `um publish check`: Audit mod repository before publishing.
 
 MCP integration is configured in `mcp_config.json` and `.mcp.json` (requires `FAL_KEY`).
